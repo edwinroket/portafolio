@@ -12,7 +12,7 @@
 <meta property="og:description" content="Construyo sistemas embebidos, automatizaciones con IA y plataformas a medida. Código serio enfocado en escalabilidad y eficiencia.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 34' fill='none'><rect width='42' height='34' rx='5' fill='%230a0a09'/><path d='M4 6C14 6 19 10 19 17C19 24 14 28 4 28L4 6' stroke='%23f1ebdd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M21 29L25 5' stroke='%235e584d' stroke-width='1.5' stroke-linecap='round'/><path d='M27 6H38L27 28H38' stroke='%23f1ebdd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32' fill='none'><rect width='63' height='31' rx='4' fill='%230a0a09' stroke='%23f1ebdd' stroke-width='0.75' stroke-opacity='0.35'/><text x='9' y='23' font-family='sans-serif' font-style='italic' font-weight='500' font-size='21' fill='%23f1ebdd'>E</text><line x1='33' y1='27' x2='36' y2='5' stroke='%235e584d' stroke-width='1.2' stroke-linecap='round'/><text x='39' y='23' font-family='sans-serif' font-style='italic' font-weight='500' font-size='21' fill='%23f1ebdd'>V</text></svg>">
 <style>
 /* ============================================================
    TOKENS
@@ -103,6 +103,7 @@ nav.top{
 nav.top.scrolled{border-bottom-color:var(--line);background:rgba(10,10,9,.82)}
 nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:18px 48px}
 .brand{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.brand-mark{height:24px;width:auto;display:block;flex-shrink:0}
 .brand-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 
@@ -384,7 +385,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
     <div class="about-prose reveal d1">
       <p>Estudio Ingeniería en Informática en Santo Tomás Talca y me desempeño como Líder de Proyectos Tecnológicos en el Laboratorio de Informática Aplicada (LIA), coordinando equipos de desarrollo y automatización.</p>
       <p>No divido el software del hardware. Diseño nodos IoT de captura eficientes, estructuro e implemento arquitecturas de sistemas asíncronos distribuidos en producción y despliego pipelines de Inteligencia Artificial (LLMs) integrados a procesos lógicos reales.</p>
-      <p>Mi enfoque es pragmático y de bajo nivel cuando se requiere: optimización de memoria en microcontroladores, persistencia de datos delgada y despliegues contenerizados altamente fiables.</p>
+      <p>Mi enfoque es pragmático y de bajo nivel cuando se requiere: optimización de memoria en microcontroladores, persistencia de datos delgada y despliegues contenerizados highly fiables.</p>
     </div>
 
     <!-- COL 3: CERTIFICADOS Y CURSOS -->
@@ -724,7 +725,7 @@ function initWorkGrid(){
     {cls:'c1 feat-a',tag:'IoT · Seguridad Crítica',yr:'2026',title:'gasLeak',em:'',desc:'Monitoreo residencial de GLP/Natural. Firmware asíncrono no bloqueante, portal cautivo y canal de confirmación humana.',stack:['ESP8266','Python','MariaDB','MQTT','Flutter'],cat:'iot',ph:'CÓDIGO Y ARQUITECTURA PRIVADA', url:'https://github.com/edwinroket'},
     {cls:'c2 feat-b',tag:'Web · Corporativo',yr:'2025',title:'MCI Talca',em:'Sitio Oficial',desc:'¿Tienes un negocio? Diseñamos plataformas web institucionales a medida. Código minimalista y captura local de formularios.',stack:['Node.js','Express','HTML5','CSS3','Vanilla JS'],cat:'web',ph:'SITIO EN PRODUCCIÓN', url:'https://mcitalca.cl/'},
     {cls:'c3 feat-c',tag:'IA · Automatización',yr:'2026',title:'Tomasín AI',em:'RAG Agent',desc:'Agente conversacional universitario. Pipeline RAG con búsqueda por similitud vectorial KNN en Redis y síntesis de voz.',stack:['Python','Flask','Redis Vector','OpenAI API','gTTS'],cat:'infra',ph:'ARQUITECTURA IA PRIVADA', url:'https://github.com/edwinroket'},
-    {cls:'c4 feat-a',tag:'Software · 100% Propio',yr:'2026',title:'POSFarmacia',em:'',desc:'Sistema transaccional de punto de venta farmacéutico. Arquitectura de base de datos relacional estrictamente normalizada.',stack:['Node.js','C#','MySQL','MariaDB'],cat:'web',ph:'CÓDIGO PRIVADO', url:'https://github.com/edwinroket'},
+    {cls:'c4 feat-a',tag:'Software · 100% Propio',yr:'2026',title:'POSFarmacia',em:'',desc:'Sistema transaccional de punto de venta farmacéutico. Arquitectura de base de datos relacional strictly normalizada.',stack:['Node.js','C#','MySQL','MariaDB'],cat:'web',ph:'CÓDIGO PRIVADO', url:'https://github.com/edwinroket'},
     {cls:'c5 feat-b',tag:'IoT · Arquitectura',yr:'2024',title:'AireTalca',em:'Estaciones',desc:'Ingeniería y arquitectura para red urbana de monitoreo ambiental. Configuración de estaciones base y transmisión cloud.',stack:['Raspberry Pi','Python','MQTT','MariaDB'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://airetalca.cl/'},
     {cls:'c6 feat-c',tag:'Software · 100% Propio',yr:'2025',title:'Cargapp',em:'Mobile',desc:'Aplicación móvil orientada a la auditoría y monitoreo geolocalizado de tarifas de combustibles en tiempo real.',stack:['Flutter','Python','REST APIs'],cat:'web',ph:'VER DEMO VIDEO (SHORTS)', url:'https://www.youtube.com/shorts/evBx-pI05yE'},
     {cls:'c7 feat-a',tag:'IoT · Agrotech',yr:'2025',title:'SmartBee',em:'Telemetría',desc:'Ejecución técnica de hardware embebido para monitoreo biomecánico de colmenas y transmisión a dashboards analíticos.',stack:['ESP32','Sensores IoT','MQTT','Cloud Infra'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://smartbee.cl/'}
