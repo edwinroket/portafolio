@@ -6,555 +6,897 @@
 <title>Edwin Vásquez — Ingeniería Informática & IoT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <meta name="description" content="Edwin Vásquez — Desarrollador backend, sistemas embebidos e IA en Talca, Chile. Plataformas robustas e infraestructura cloud.">
 <meta property="og:title" content="Edwin Vásquez — Ingeniería Informática & IoT">
 <meta property="og:description" content="Construyo sistemas embebidos, automatizaciones con IA y plataformas a medida. Código serio enfocado en escalabilidad y eficiencia.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32' fill='none'><rect width='63' height='31' rx='4' fill='%2308090a' stroke='%2338bdf8' stroke-width='1'/><text x='10' y='22' font-family='sans-serif' font-weight='700' font-size='18' fill='%23ffffff'>E</text><text x='36' y='22' font-family='sans-serif' font-weight='700' font-size='18' fill='%2338bdf8'>V</text></svg>">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32' fill='none'><rect width='63' height='31' rx='4' fill='%230a0a09' stroke='%23f1ebdd' stroke-width='0.75' stroke-opacity='0.35'/><text x='9' y='23' font-family='sans-serif' font-style='italic' font-weight='500' font-size='21' fill='%23f1ebdd'>E</text><line x1='33' y1='27' x2='36' y2='5' stroke='%235e584d' stroke-width='1.2' stroke-linecap='round'/><text x='39' y='23' font-family='sans-serif' font-style='italic' font-weight='500' font-size='21' fill='%23f1ebdd'>V</text></svg>">
 <style>
 /* ============================================================
-   TOKENS & LINEAR/VERCEL THEME
+   TOKENS
    ============================================================ */
-:root {
-  --bg: #08090a;
-  --bg-card: rgba(18, 20, 24, 0.65);
-  --bg-card-hover: rgba(26, 29, 36, 0.8);
-  --fg: #f1f5f9;
-  --fg-muted: #94a3b8;
-  --fg-subtle: #475569;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(56, 189, 248, 0.35);
-  --accent: #38bdf8;
-  --accent-glow: rgba(56, 189, 248, 0.15);
-  --accent-purple: #a855f7;
-  --accent-green: #22c55e;
-  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --radius: 16px;
+:root{
+  --bg:#0a0a09;
+  --bg-2:#121210;
+  --bg-3:#1a1a17;
+  --fg:#f1ebdd;
+  --fg-2:#a8a092;
+  --fg-3:#5e584d;
+  --line:#26241f;
+  --accent:oklch(0.86 0.17 105);
+  --accent-dim:oklch(0.86 0.17 105 / 0.18);
+  --serif:"Bricolage Grotesque","Geist",system-ui,sans-serif;
+  --sans:"Geist",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --display-settings:"opsz" 96;
+  --body-display-settings:"opsz" 48;
+  --ease-soft:cubic-bezier(.25,.46,.45,.94);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+  font-feature-settings:"ss01","ss02";
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background-color: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.12), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.06), transparent);
-  background-attachment: fixed;
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:100;
+  opacity:.04;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+::selection{background:var(--accent);color:#0a0a09}
+a{color:inherit;text-decoration:none}
+
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:201;pointer-events:none}
+.scroll-progress-bar{display:block;height:100%;background:linear-gradient(90deg,var(--accent),oklch(0.78 0.13 105));transform-origin:0 0;transform:scaleX(0);transition:transform .06s linear;box-shadow:0 0 8px oklch(0.86 0.17 105 / .6)}
+
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;transition:opacity .3s var(--ease-out)}
+.cursor.is-ready{opacity:1}
+.cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;margin:-2.5px;background:var(--accent);border-radius:50%;will-change:transform;box-shadow:0 0 10px var(--accent)}
+.cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;margin:-18px;border:1px solid oklch(0.86 0.17 105 / .65);border-radius:50%;will-change:transform;transition:width .4s var(--ease-out),height .4s var(--ease-out),margin .4s var(--ease-out),border-color .3s,opacity .3s;opacity:.7}
+.cursor.is-interactive .cursor-ring{width:52px;height:52px;margin:-26px;border-color:var(--fg-2);opacity:.9}
+.cursor-active,.cursor-active a,.cursor-active button{cursor:none!important}
+
+.hero-mesh{
+  position:absolute;inset:-15%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle 700px at var(--mx,28%) var(--my,45%), oklch(0.86 0.17 105 / .28),transparent 55%),
+    radial-gradient(circle 450px at calc(100% - var(--mx,28%)) calc(100% - var(--my,45%)), oklch(0.72 0.09 200 / .14),transparent 60%),
+    radial-gradient(circle 280px at 55% 80%, oklch(0.86 0.17 105 / .10),transparent 55%);
+  filter:blur(40px) saturate(160%);
+  transition:opacity .4s;
+  will-change:background;
 }
 
-::selection { background: var(--accent); color: #000; }
-a { color: inherit; text-decoration: none; }
+.wrap{max-width:1440px;margin:0 auto;padding:0 48px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.serif{font-family:var(--serif);font-weight:400;font-variation-settings:var(--display-settings)}
+.italic{font-style:italic;font-family:var(--serif);font-variation-settings:var(--display-settings)}
+.accent{color:var(--accent)}
 
-.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-.mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; }
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--fg-2);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-/* NAV */
-nav.top {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  background: rgba(8, 9, 10, 0.7);
-  border-bottom: 1px solid var(--border);
+nav.top{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  background:rgba(10,10,9,.55);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s ease,background .4s ease;
 }
-nav.top .inner {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 24px; max-width: 1280px; margin: 0 auto;
-}
-.brand { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; }
-.brand-mark {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
-  border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px;
-  font-family: var(--font-mono); font-size: 12px; color: var(--accent);
-}
-.navlinks { display: flex; gap: 28px; }
-.navlinks a { font-size: 13px; color: var(--fg-muted); transition: color .2s; }
-.navlinks a:hover { color: var(--fg); }
-.status-pill {
-  display: flex; align-items: center; gap: 8px; padding: 5px 12px;
-  background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: 99px; font-size: 11px; color: var(--accent-green); font-family: var(--font-mono);
-}
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+nav.top.scrolled{border-bottom-color:var(--line);background:rgba(10,10,9,.82)}
+nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:18px 48px}
+.brand{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.brand-mark{height:24px;width:auto;display:block;flex-shrink:0}
+.brand-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 
-/* HERO */
-header.hero { padding: 140px 0 60px; text-align: center; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 99px;
-  font-size: 12px; color: var(--fg-muted); margin-bottom: 24px;
-}
-.hero-title {
-  font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1.08;
-  letter-spacing: -0.04em; margin-bottom: 20px;
-  background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.6) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero-lede {
-  font-size: clamp(16px, 1.8vw, 20px); color: var(--fg-muted);
-  max-width: 680px; margin: 0 auto 36px; font-weight: 300;
-}
-.hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
-  border-radius: 10px; font-size: 13px; font-weight: 500; transition: all .25s; cursor: pointer;
-}
-.btn-primary {
-  background: var(--fg); color: #000; font-weight: 600;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-}
-.btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); }
-.btn-secondary { background: var(--bg-card); color: var(--fg); border: 1px solid var(--border); }
-.btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+.navlinks{display:flex;gap:34px}
+.navlinks a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);position:relative;transition:color .25s;display:inline-block;min-width:3ch}
+.navlinks a:hover{color:var(--fg)}
+.navlinks a::before{content:attr(data-num);color:var(--fg-3);margin-right:6px}
+.navlinks a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+.navlinks a:hover::after{transform:scaleX(1);transform-origin:left}
 
-/* BENTO GRID BASE */
-.bento-section { padding: 40px 0 100px; }
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-}
+.nav-right{display:flex;align-items:center;gap:24px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--fg-2)}
+#clock{color:var(--fg);font-variant-numeric:tabular-nums}
 
-/* BENTO CARD CORE */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+header.hero{
+  min-height:100vh;min-height:100svh;padding:140px 0 80px;
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;
+  overflow:hidden;
 }
-.card:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
-}
+header.hero > *{position:relative;z-index:1}
+header.hero .hero-mesh{z-index:0}
 
-.card-tag {
-  font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
-  color: var(--accent); letter-spacing: 0.08em; display: flex; align-items: center; gap: 6px;
-  margin-bottom: 12px;
-}
-.card-tag.green { color: var(--accent-green); }
-.card-tag.purple { color: var(--accent-purple); }
+.hero-meta{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;margin-bottom:80px}
+.hero-meta .cell .k{display:block;color:var(--fg-3);margin-bottom:8px}
+.hero-meta .cell .v{font-family:var(--mono);font-size:12px;color:var(--fg);letter-spacing:.03em}
 
-.card-title { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 10px; }
-.card-desc { font-size: 13.5px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 20px; }
+.hero-title{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 96;font-size:clamp(60px,14vw,200px);line-height:.86;letter-spacing:-.045em;color:var(--fg)}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .char{display:inline-block;will-change:transform;transform:translateY(115%);transition:transform .95s var(--ease-out)}
+.hero-title .char.in{transform:translateY(0)}
+.hero-title .word-gap{display:inline-block;width:.22em}
+.hero-title em{font-style:italic;color:var(--fg-2)}
 
-.tech-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-.tech-pills span {
-  font-family: var(--font-mono); font-size: 10px; padding: 3px 8px;
-  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--fg-muted);
-}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:60px;gap:48px;flex-wrap:wrap}
+.hero-foot .lede{font-family:var(--serif);font-style:italic;font-variation-settings:"opsz" 32;font-weight:400;font-size:clamp(20px,2.2vw,28px);line-height:1.28;max-width:700px;color:var(--fg);letter-spacing:-.015em}
+.hero-foot .lede .accent{font-style:italic;font-family:var(--serif);font-weight:700;font-size:.82em;border:1px solid var(--accent);padding:2px 10px;border-radius:99px;color:var(--accent);margin:0 4px;display:inline-block;transform:translateY(-3px);transition:background .3s,color .3s}
+.hero-foot .lede .accent:hover{background:var(--accent);color:#0a0a09}
+.scroll-cue{font-family:var(--mono);font-size:11px;color:var(--fg-3);letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.scroll-cue::after{content:"";display:inline-block;width:40px;height:1px;background:var(--fg-3);position:relative;overflow:hidden}
+.scroll-cue .arrow{width:14px;height:14px;border-right:1px solid var(--fg-2);border-bottom:1px solid var(--fg-2);transform:rotate(45deg);margin-left:-8px;animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.4}50%{transform:rotate(45deg) translate(4px,4px);opacity:1}}
 
-/* CARD SIZES (BENTO ARCHITECTURE) */
-.col-12 { grid-column: span 12; }
-.col-8  { grid-column: span 8; }
-.col-7  { grid-column: span 7; }
-.col-6  { grid-column: span 6; }
-.col-5  { grid-column: span 5; }
-.col-4  { grid-column: span 4; }
+.ascii-deco{position:absolute;right:48px;top:140px;z-index:1;font-family:var(--mono);font-size:10px;color:var(--fg-3);line-height:1.4;text-align:right;white-space:pre;pointer-events:none;opacity:.4}
 
-/* FEATURED CARD: GASLEAK */
-.card-featured {
-  background: linear-gradient(135deg, rgba(18, 20, 24, 0.9), rgba(15, 23, 42, 0.6));
-  border: 1px solid rgba(56, 189, 248, 0.2);
-}
-.pipeline-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-  margin: 18px 0; padding: 14px; background: rgba(0, 0, 0, 0.35);
-  border-radius: 10px; border: 1px solid var(--border);
-}
-.pipeline-step { font-family: var(--font-mono); font-size: 10px; }
-.pipeline-step strong { display: block; color: var(--fg); font-size: 11px; margin-bottom: 2px; }
-.pipeline-step span { color: var(--fg-muted); font-size: 9.5px; }
+section{padding:140px 0;position:relative}
+.section-head{display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;align-items:end}
+.section-head .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--fg-2);text-transform:uppercase}
+.section-head .num .bar{display:inline-block;width:40px;height:1px;background:var(--fg-3);vertical-align:middle;margin-right:14px;margin-bottom:3px}
+.section-head h2{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;font-size:clamp(44px,6.5vw,88px);line-height:.95;letter-spacing:-.035em;color:var(--fg)}
+.section-head h2 em{font-style:italic;color:var(--fg-2)}
 
-/* ABOUT & EDUCATION CARDS */
-.about-card { justify-content: flex-start; gap: 16px; }
-.meta-list { display: flex; flex-direction: column; gap: 10px; font-size: 12px; margin-top: 10px; }
-.meta-item dt { color: var(--fg-subtle); text-transform: uppercase; font-size: 9.5px; font-family: var(--font-mono); }
-.meta-item dd { color: var(--fg); font-weight: 500; }
+/* ABOUT SECTION */
+.about-grid{display:grid;grid-template-columns:220px 1fr 1.2fr;gap:48px}
+.about-meta dl{display:flex;flex-direction:column;gap:20px}
+.about-meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px}
+.about-meta dd{font-size:14px;color:var(--fg);line-height:1.4}
+.about-prose p{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 24;font-size:20px;line-height:1.45;color:var(--fg);margin-bottom:20px;letter-spacing:-.018em}
 
-/* CERTIFICATES BENTO GRID */
-.cert-item-link {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 14px; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border);
-  border-radius: 8px; transition: all .2s; margin-bottom: 8px;
-}
-.cert-item-link:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
-.cert-item-link strong { font-size: 12.5px; display: block; }
-.cert-item-link span { font-size: 10.5px; color: var(--fg-muted); font-family: var(--font-mono); }
-.cert-item-link .icon { color: var(--accent); font-size: 12px; }
+/* CERTIFICATES LIST WITH LINKS */
+.cert-list{display:flex;flex-direction:column;gap:16px}
+.cert-card{padding:16px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;transition:border-color .3s, transform .3s}
+.cert-card:hover{border-color:var(--accent);transform:translateX(4px)}
+.cert-card h4{font-family:var(--serif);font-size:16px;color:var(--fg);margin-bottom:4px}
+.cert-card p{font-family:var(--mono);font-size:10px;color:var(--fg-3);margin-bottom:10px}
+.cert-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.cert-link:hover{text-decoration:underline}
 
-/* STACK CARD MATRIX */
-.stack-matrix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 100%; margin-top: 14px; }
-.stack-group h5 { font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
-.stack-group ul { list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); }
+.stack-wrap{position:relative}
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 0;margin:48px 0;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee-track{display:flex;gap:60px;width:max-content;animation:marquee 40s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.mq-item{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;font-size:56px;line-height:1;color:var(--fg);display:flex;align-items:center;gap:24px;letter-spacing:-.035em;white-space:nowrap}
+.mq-item em{font-style:italic;color:var(--fg-2)}
+.mq-item::after{content:"✦";font-family:var(--sans);font-size:18px;color:var(--accent);margin-left:24px}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
-/* LINK ARROW */
-.card-arrow {
-  position: absolute; top: 24px; right: 24px; width: 32px; height: 32px;
-  border-radius: 50%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
-  display: grid; place-items: center; color: var(--fg-muted); transition: all .3s;
-}
-.card:hover .card-arrow { color: var(--fg); border-color: var(--accent); background: var(--accent-glow); transform: translate(2px, -2px); }
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stack-cat{background:var(--bg);padding:32px 28px;transition:background .35s ease}
+.stack-cat:hover{background:var(--bg-2)}
+.stack-cat h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);margin-bottom:18px}
+.stack-cat ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.stack-cat li{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 24;font-size:22px;line-height:1.2;color:var(--fg);display:flex;justify-content:space-between;align-items:baseline;letter-spacing:-.015em}
 
-/* CONTACT */
-.contact-wrap {
-  padding: 60px 40px; background: linear-gradient(180deg, var(--bg-card), rgba(8, 9, 10, 0.95));
-  border: 1px solid var(--border); border-radius: var(--radius); text-align: center; margin: 40px 0 100px;
-}
-.contact-wrap h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
-.contact-links { display: flex; justify-content: center; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
-.contact-pill {
-  padding: 10px 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
-  border-radius: 8px; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: border-color .2s;
-}
-.contact-pill:hover { border-color: var(--accent); }
+.work-intro{margin-bottom:48px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.work-intro .count{font-family:var(--mono);font-size:11px;color:var(--fg-2);letter-spacing:.12em}
+.work-intro .filter{display:flex;gap:8px}
+.work-intro .filter button{background:transparent;border:1px solid var(--line);color:var(--fg-2);padding:8px 14px;border-radius:99px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.work-intro .filter button.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.work-intro .filter button:hover:not(.active){border-color:var(--fg-2);color:var(--fg)}
 
-footer {
-  border-top: 1px solid var(--border); padding: 32px 0; text-align: center;
-  font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);
-}
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:140px;gap:16px}
+.work-card{position:relative;background:var(--bg-2);border:1px solid var(--line);overflow:hidden;cursor:pointer;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1),border-color .35s;will-change:transform}
+.work-card:hover {border-color:var(--fg-3)}
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .col-8, .col-7, .col-6, .col-5, .col-4 { grid-column: span 12; }
-  .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
-  .stack-matrix { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .pipeline-grid { grid-template-columns: 1fr; }
-  .navlinks { display: none; }
+.card-halo{position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(200px circle at var(--hx,50%) var(--hy,50%),oklch(0.86 0.17 105 / .18),transparent 65%);opacity:0;transition:opacity .4s}
+.work-card:hover .card-halo{opacity:1}
+
+.work-card .thumb{position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(241,235,221,.025) 14px 15px),linear-gradient(135deg,var(--bg-3),var(--bg-2));display:grid;place-items:center}
+.work-card.feat-a .thumb{background:radial-gradient(circle at 30% 30%,oklch(0.86 0.17 105 / .12),transparent 55%),repeating-linear-gradient(45deg,transparent 0 18px,rgba(241,235,221,.03) 18px 19px),linear-gradient(135deg,#14130f,#0c0c0a)}
+.work-card.feat-b .thumb{background:radial-gradient(circle at 80% 20%,rgba(241,235,221,.06),transparent 50%),repeating-linear-gradient(0deg,transparent 0 22px,rgba(241,235,221,.025) 22px 23px),linear-gradient(180deg,#15130d,#0a0a09)}
+.work-card.feat-c .thumb{background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(241,235,221,.04) 9px 10px),linear-gradient(135deg,#131310,#0a0a09)}
+.work-card .ph{font-family:var(--mono);font-size:10px;color:var(--fg-3);letter-spacing:.12em;text-transform:uppercase;border:1px dashed var(--fg-3);padding:6px 12px;border-radius:99px;background:rgba(10,10,9,.6)}
+.work-card .overlay{position:absolute;inset:0;padding:24px 28px;z-index:2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg,transparent 20%,rgba(10,10,9,.94) 100%)}
+.work-card .tag{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;color:var(--fg-2);letter-spacing:.12em;text-transform:uppercase}
+.work-card .tag .yr{color:var(--fg-3)}
+.work-card .meta{display:flex;flex-direction:column;gap:6px}
+.work-card h3{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 36;font-size:30px;line-height:1;letter-spacing:-.03em;color:var(--fg)}
+.work-card h3 em{font-style:italic;color:var(--fg-2)}
+.work-card .desc{font-size:12px;color:var(--fg-2);line-height:1.4;max-width:420px}
+.work-card .stack-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.work-card .stack-tags span{font-family:var(--mono);font-size:9px;color:var(--fg-3);letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--line);border-radius:99px}
+
+.work-card.c1{grid-column:1/8;grid-row:span 3}
+.work-card.c2{grid-column:8/13;grid-row:span 3}
+.work-card.c3{grid-column:1/5;grid-row:span 3}
+.work-card.c4{grid-column:5/9;grid-row:span 3}
+.work-card.c5{grid-column:9/13;grid-row:span 3}
+.work-card.c6{grid-column:1/7;grid-row:span 3}
+.work-card.c7{grid-column:7/13;grid-row:span 3}
+
+.work-card .arrow-cta{position:absolute;top:24px;right:24px;width:38px;height:38px;z-index:4;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:rgba(10,10,9,.6);transition:.4s}
+.work-card .arrow-cta svg{width:14px;height:14px;stroke:var(--fg-2);transition:.4s}
+.work-card:hover .arrow-cta{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
+.work-card:hover .arrow-cta svg{stroke:#0a0a09}
+
+.work-grid.filtered .work-card{grid-column:span 4!important;grid-row:span 3!important}
+
+.contact{padding:72px 0 80px;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact-glow{position:absolute;top:-80px;left:-5%;right:-5%;height:360px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 25% 50%,oklch(0.86 0.17 105 / .07),transparent 55%),radial-gradient(ellipse at 75% 50%,oklch(0.72 0.07 250 / .04),transparent 55%);filter:blur(70px)}
+.contact > *{position:relative;z-index:1}
+
+.contact h2{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 96;font-size:clamp(60px,12vw,160px);line-height:.88;letter-spacing:-.045em;color:var(--fg);margin-bottom:80px}
+.contact h2 em{font-style:italic;color:var(--fg-2)}
+.contact-mail{display:flex;align-items:center;gap:24px;font-family:var(--serif);font-style:italic;font-weight:500;font-variation-settings:"opsz" 72;font-size:clamp(30px,4.5vw,60px);color:var(--fg);line-height:1;letter-spacing:-.035em;padding-bottom:36px;border-bottom:1px solid var(--line);transition:color .35s;flex-wrap:wrap}
+.contact-mail:hover{color:var(--accent)}
+.contact-mail .arrow{width:64px;height:64px;border:1px solid var(--fg-2);border-radius:50%;display:grid;place-items:center;transition:.4s;flex-shrink:0}
+.contact-mail:hover .arrow{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
+.contact-mail .arrow svg{width:22px;height:22px;stroke:var(--fg);transition:.4s}
+.contact-mail:hover .arrow svg{stroke:#0a0a09}
+
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;margin-top:60px}
+.contact-grid .col h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);margin-bottom:18px}
+.contact-grid .col p,.contact-grid .col a{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 24;font-size:20px;color:var(--fg);line-height:1.3;display:block;letter-spacing:-.015em}
+.contact-grid .col a{transition:color .25s}
+.contact-grid .col a:hover{color:var(--accent)}
+.contact-grid .col .sub{font-family:var(--mono);font-size:11px;color:var(--fg-2);margin-top:6px;letter-spacing:.04em}
+
+footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--fg-3)}
+.footer-mark{height:30px;width:auto;display:block}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+
+@media(max-width:1100px){
+  .wrap{padding:0 24px}
+  nav.top .inner{padding:14px 24px}
+  .hamburger{display:flex}
+  .navlinks{position:fixed;inset:0;background:var(--bg);z-index:49;flex-direction:column;justify-content:center;align-items:center;gap:48px;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  .navlinks.open{transform:translateX(0)}
+  .navlinks a{font-size:16px;letter-spacing:.08em}
+  .hero-meta{grid-template-columns:1fr 1fr;gap:18px}
+  .section-head{grid-template-columns:1fr;gap:18px}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .stack-grid{grid-template-columns:repeat(2,1fr)}
+  .work-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:120px}
+  .work-card.c1,.work-card.c2,.work-card.c3,.work-card.c4,.work-card.c5,.work-card.c6,.work-card.c7{grid-column:1/-1;grid-row:span 3}
+  .contact-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  .ascii-deco{display:none}
+  section{padding:80px 0}
+  header.hero{padding:120px 0 60px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav class="top">
+<div class="cursor" data-cursor-root aria-hidden="true">
+  <span class="cursor-dot"></span>
+  <span class="cursor-ring"></span>
+</div>
+
+<div class="scroll-progress" aria-hidden="true">
+  <span class="scroll-progress-bar" data-scroll-progress></span>
+</div>
+
+<nav class="top" id="nav">
   <div class="inner">
     <a class="brand" href="#top">
-      <span class="brand-mark">EV</span>
-      <span>Edwin Vásquez</span>
+      <svg class="brand-mark" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EV">
+        <rect x="0.5" y="0.5" width="63" height="31" rx="4" stroke="#f1ebdd" stroke-width="0.75" stroke-opacity="0.35"/>
+        <text x="9" y="23" font-family="'Bricolage Grotesque','Georgia',serif" font-style="italic" font-weight="500" font-size="21" fill="#f1ebdd">E</text>
+        <line x1="33" y1="27" x2="36" y2="5" stroke="#5e584d" stroke-width="1.2" stroke-linecap="round"/>
+        <text x="39" y="23" font-family="'Bricolage Grotesque','Georgia',serif" font-style="italic" font-weight="500" font-size="21" fill="#f1ebdd">V</text>
+      </svg>
+      <span class="brand-dot"></span>
+      <span>Edwin Vásquez — Informática & IoT</span>
     </a>
     <div class="navlinks">
-      <a href="#about">Sobre Mí</a>
-      <a href="#projects">Arquitectura & Proyectos</a>
-      <a href="#certifications">Certificaciones</a>
-      <a href="#contact">Contacto</a>
+      <a href="#about" data-num="01">Sobre</a>
+      <a href="#stack" data-num="02">Stack</a>
+      <a href="#work" data-num="03">Obra</a>
+      <a href="#contact" data-num="04">Contacto</a>
     </div>
-    <div class="status-pill">
-      <span class="status-dot"></span>
-      <span>Disponible</span>
+    <div class="nav-right">
+      <span>Talca, CL</span>
+      <span id="clock">--:--:--</span>
     </div>
+    <button class="hamburger" id="menuBtn" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <div class="wrap" id="top">
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-badge">
-      <span class="mono">Talca, Chile · UTC−4[cite: 7]</span>
-    </div>
-    <h1 class="hero-title">Ingeniería Informática,<br/>Sistemas Embebidos & IA.</h1>
-    <p class="hero-lede">
-      Diseño arquitecturas backend distribuidas, hardware IoT de captura y automatización inteligente con modelos de lenguaje.
+<header class="hero">
+  <div class="hero-mesh" aria-hidden="true"></div>
+
+  <pre class="ascii-deco">    ┌─────────────────┐
+    │  PORTAFOLIO·26  │
+    │  vol. 01 / iv   │
+    │  ────────────── │
+    │  TLC · CL · S.A │
+    └─────────────────┘
+       ╲
+        ╲
+         ▼     </pre>
+
+  <div class="hero-meta">
+    <div class="cell reveal"><span class="mono k">§ Index</span><span class="v">001 / Edwin M. Vásquez F.</span></div>
+    <div class="cell reveal d1"><span class="mono k">§ Oficio</span><span class="v">Sistemas Embebidos & IA</span></div>
+    <div class="cell reveal d2"><span class="mono k">§ Edición</span><span class="v">MMXXVI · Vol. 01</span></div>
+    <div class="cell reveal d3"><span class="mono k">§ Status</span><span class="v accent">● Disponible para proyectos</span></div>
+  </div>
+
+  <h1 class="hero-title" id="heroTitle">
+    <div class="line">Edwin</div>
+    <div class="line"><em>Vásquez.</em></div>
+  </h1>
+
+  <div class="hero-foot">
+    <p class="lede reveal d3">
+      Construyo sistemas embebidos (IoT), automatizaciones con Inteligencia Artificial y plataformas web a medida desde Talca, Chile —
+      <span class="accent">código serio</span> para problemas complejos de negocio e infraestructura robusta.
     </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-primary">Explorar Bento Grid</a>
-      <a href="https://github.com/edwinroket" target="_blank" rel="noopener" class="btn btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        github.com/edwinroket[cite: 7]
-      </a>
+    <div class="scroll-cue reveal d4">Desplázate <span class="arrow"></span></div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-head">
+    <span class="num reveal"><span class="bar"></span>§ 01 — Sobre Mí</span>
+    <h2 class="reveal d1">Sistemas robustos,<br/><em>hardware</em> conectado.</h2>
+  </div>
+
+  <div class="about-grid">
+    <!-- COL 1: META INFO -->
+    <div class="about-meta reveal">
+      <dl>
+        <div><dt>Nombre</dt><dd>Edwin Manuel Vásquez Fontalvo</dd></div>
+        <div><dt>Base</dt><dd>Talca, Región del Maule<br/>Chile · UTC−4</dd></div>
+        <div><dt>Formación</dt><dd>Ingeniería en Informática<br/>IP Santo Tomás · Sede Talca</dd></div>
+        <div><dt>Roles</dt><dd>Líder de Proyectos en LIA<br/>Consultor IoT / Backend</dd></div>
+      </dl>
     </div>
-  </header>
 
-  <!-- BENTO GRID SECTION -->
-  <section class="bento-section" id="projects">
-    <div class="bento-grid">
-
-      <!-- 1. HERO CARD: GASLEAK ARCHITECTURE (COL 8) -->
-      <div class="card card-featured col-8">
-        <div>
-          <span class="card-tag"><span class="status-dot" style="background:var(--accent)"></span> Caso de Estudio · Seguridad Crítica</span>
-          <h3 class="card-title">gasLeak — Sistema IoT Distribuido</h3>
-          <p class="card-desc">
-            Monitoreo residencial crítico de GLP/Natural bajo una arquitectura asíncrona y desacoplada. Firmware no bloqueante con marcas de tiempo `millis()`, mitigación de falsos positivos por ventana temporal y confirmación interactiva humana vía llamada nativa automatizada.
-          </p>
-
-          <div class="pipeline-grid">
-            <div class="pipeline-step">
-              <strong>01. Captura</strong>
-              <span>ESP8266 + MQ2 (Filtro ADC sostenido)</span>
-            </div>
-            <div class="pipeline-step">
-              <strong>02. Transporte</strong>
-              <span>MQTT Tópico Jerárquico Asíncrono</span>
-            </div>
-            <div class="pipeline-step">
-              <strong>03. Backend</strong>
-              <span>Python Daemon + MariaDB (Lean Persistence)</span>
-            </div>
-            <div class="pipeline-step">
-              <strong>04. Respuesta</strong>
-              <span>Flutter App + Webhook Emergencia</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tech-pills">
-          <span>ESP8266 (C++)</span><span>HiveMQ</span><span>Python</span><span>MariaDB</span><span>Flutter</span><span>Twilio</span>
-        </div>
-      </div>
-
-      <!-- 2. ABOUT PROFILE (COL 4) -->
-      <div class="card about-card col-4" id="about">
-        <div>
-          <span class="card-tag purple">Perfil Técnico</span>
-          <h3 class="card-title">Edwin Vásquez</h3>
-          <p class="card-desc" style="font-size: 13px; margin-bottom: 12px;">
-            Estudiante de Ingeniería en Informática (IP Santo Tomás)[cite: 5, 7] y Líder de Proyectos en el Laboratorio de Informática Aplicada (LIA)[cite: 7]. Especializado en el enlace directo entre firmware de campo e infraestructura de datos en la nube[cite: 7].
-          </p>
-
-          <dl class="meta-list">
-            <div class="meta-item"><dt>Formación</dt><dd>Ingeniería en Informática (En curso)[cite: 5, 7]</dd></div>
-            <div class="meta-item"><dt>Base</dt><dd>Talca, Región del Maule, Chile[cite: 7]</dd></div>
-            <div class="meta-item"><dt>Modalidad</dt><dd>Consultoría / Boleta de Honorarios</dd></div>
-          </dl>
-        </div>
-      </div>
-
-      <!-- 3. PRODUCTION LINK: SMARTBEE (COL 4) -->
-      <a href="https://smartbee.cl/" target="_blank" rel="noopener" class="card col-4">
-        <span class="card-arrow">↗</span>
-        <div>
-          <span class="card-tag green">● En Producción</span>
-          <h3 class="card-title">SmartBee.cl</h3>
-          <p class="card-desc">
-            Ejecución técnica e integración de hardware embebido multisensorial para el monitoreo biomecánico y ambiental de colmenas en terreno[cite: 7].
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>ESP32</span><span>Sensores IoT[cite: 7]</span><span>MQTT[cite: 7]</span><span>Cloud Telemetry</span>
-        </div>
-      </a>
-
-      <!-- 4. PRODUCTION LINK: AIRETALCA (COL 4) -->
-      <a href="https://airetalca.cl/" target="_blank" rel="noopener" class="card col-4">
-        <span class="card-arrow">↗</span>
-        <div>
-          <span class="card-tag green">● En Producción</span>
-          <h3 class="card-title">AireTalca.cl</h3>
-          <p class="card-desc">
-            Definición y arquitectura global del sistema de estaciones urbanas para el monitoreo de calidad del aire y partículas en suspensión[cite: 7].
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>Arquitectura IoT</span><span>Raspberry Pi[cite: 7]</span><span>Python[cite: 7]</span><span>DB Cloud[cite: 7]</span>
-        </div>
-      </a>
-
-      <!-- 5. PRODUCTION LINK: MCI TALCA (COL 4) -->
-      <a href="https://mcitalca.cl/" target="_blank" rel="noopener" class="card col-4">
-        <span class="card-arrow">↗</span>
-        <div>
-          <span class="card-tag green">● En Producción</span>
-          <h3 class="card-title">MCI Talca Web</h3>
-          <p class="card-desc">
-            Portal institucional minimalista estilo Apple. Enrutamiento limpio en Node.js y procesamiento nativo de solicitudes sin dependencias externas.
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>Node.js</span><span>Express</span><span>HTML5</span><span>CSS3</span><span>Vanilla JS</span>
-        </div>
-      </a>
-
-      <!-- 6. AI & RAG AGENT: TOMASÍN AI (COL 6) -->
-      <div class="card col-6">
-        <div>
-          <span class="card-tag purple">Inteligencia Artificial</span>
-          <h3 class="card-title">Tomasín — AI RAG Agent</h3>
-          <p class="card-desc">
-            Agente conversacional universitario. Pipeline RAG con búsqueda por similitud vectorial KNN en memoria utilizando Redis, contextualización semántica en GPT-4o y generación de audio TTS dinámico en tiempo real.
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>Python</span><span>Flask</span><span>Redis Vector Search</span><span>OpenAI API</span><span>gTTS</span>
-        </div>
-      </div>
-
-      <!-- 7. VIDEO DEMO: CARGAPP (COL 6) -->
-      <a href="https://www.youtube.com/shorts/evBx-pI05yE" target="_blank" rel="noopener" class="card col-6">
-        <span class="card-arrow">↗</span>
-        <div>
-          <span class="card-tag">Mobile Demo</span>
-          <h3 class="card-title">Cargapp — Monitoreo de Combustibles</h3>
-          <p class="card-desc">
-            Aplicación móvil de consulta geolocalizada y análisis en tiempo real de tarifas de combustible en Chile. Enfoque analítico y consumo optimizado de APIs REST.
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>Flutter</span><span>Python</span><span>REST APIs</span><span>Video Demo</span>
-        </div>
-      </a>
-
-      <!-- 8. FULL STACK MATRIX (COL 6) -->
-      <div class="card col-6">
-        <div>
-          <span class="card-tag">Stack & Herramientas</span>
-          <h3 class="card-title">Capacidades Técnicas</h3>
-          
-          <div class="stack-matrix">
-            <div class="stack-group">
-              <h5>Lenguajes</h5>
-              <ul>
-                <li>Python[cite: 7]</li>
-                <li>JavaScript[cite: 7]</li>
-                <li>Java[cite: 7]</li>
-                <li>C# / C++[cite: 7]</li>
-              </ul>
-            </div>
-            <div class="stack-group">
-              <h5>Backend</h5>
-              <ul>
-                <li>Express.js</li>
-                <li>Flask / FastAPI</li>
-                <li>REST APIs[cite: 7]</li>
-                <li>Docker[cite: 7]</li>
-              </ul>
-            </div>
-            <div class="stack-group">
-              <h5>Bases de Datos</h5>
-              <ul>
-                <li>MariaDB / MySQL[cite: 7]</li>
-                <li>Redis Vector</li>
-                <li>SQLite[cite: 7]</li>
-                <li>Normalización</li>
-              </ul>
-            </div>
-            <div class="stack-group">
-              <h5>Hardware</h5>
-              <ul>
-                <li>ESP32 / ESP8266[cite: 7]</li>
-                <li>Raspberry Pi[cite: 7]</li>
-                <li>MQTT / HiveMQ[cite: 7]</li>
-                <li>Sensores IoT[cite: 7]</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 9. CERTIFICATIONS REPOSITORY (COL 6) -->
-      <div class="card col-6" id="certifications">
-        <div>
-          <span class="card-tag">Acreditación Oficial</span>
-          <h3 class="card-title">Certificaciones & Cursos</h3>
-          
-          <div style="margin-top: 14px;">
-            <a href="docs/certificado-programacion-avanzada.pdf" target="_blank" rel="noopener" class="cert-item-link">
-              <div>
-                <strong>Programación Avanzada (270 hrs)[cite: 5, 8]</strong>
-                <span>IP Santo Tomás — 2026[cite: 5, 8]</span>
-              </div>
-              <span class="icon">PDF ↗</span>
-            </a>
-
-            <a href="docs/certificado-diseno-software.pdf" target="_blank" rel="noopener" class="cert-item-link">
-              <div>
-                <strong>Diseño Básico de Software (162 hrs)[cite: 9]</strong>
-                <span>IP Santo Tomás — 2025[cite: 9]</span>
-              </div>
-              <span class="icon">PDF ↗</span>
-            </a>
-
-            <a href="docs/certificado-soporte-informatico.pdf" target="_blank" rel="noopener" class="cert-item-link">
-              <div>
-                <strong>Soporte Informático (144 hrs)[cite: 6, 10]</strong>
-                <span>IP Santo Tomás — 2025[cite: 6, 10]</span>
-              </div>
-              <span class="icon">PDF ↗</span>
-            </a>
-
-            <a href="docs/certificado-iot-mit.pdf" target="_blank" rel="noopener" class="cert-item-link">
-              <div>
-                <strong>Internet of Things (IoT)[cite: 2, 12]</strong>
-                <span>MIT Professional Education[cite: 2, 12]</span>
-              </div>
-              <span class="icon">PDF ↗</span>
-            </a>
-
-            <a href="docs/certificado-ia-generativa-mit.pdf" target="_blank" rel="noopener" class="cert-item-link">
-              <div>
-                <strong>IA Generativa & Productividad[cite: 4, 11]</strong>
-                <span>MIT Professional Education & Google[cite: 3, 4, 11, 13]</span>
-              </div>
-              <span class="icon">PDF ↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 10. SYSTEM POS: POSFARMACIA (COL 12) -->
-      <div class="card col-12">
-        <div>
-          <span class="card-tag">Software Transaccional · Autoría 100%</span>
-          <h3 class="card-title">POSFarmacia — Arquitectura de Datos Normalizada</h3>
-          <p class="card-desc" style="max-width: 900px;">
-            Sistema de punto de venta y control transaccional para farmacias. Diseño estricto de base de datos relacional normalizada enfocado en consistencia ACID para compras, administración de inventarios críticos y trazabilidad operativa.
-          </p>
-        </div>
-        <div class="tech-pills">
-          <span>Node.js</span><span>C#[cite: 7]</span><span>MySQL</span><span>MariaDB[cite: 7]</span><span>Control Transaccional</span>
-        </div>
-      </div>
-
+    <!-- COL 2: PROSA -->
+    <div class="about-prose reveal d1">
+      <p>Estudio Ingeniería en Informática en Santo Tomás Talca y me desempeño como Líder de Proyectos Tecnológicos en el Laboratorio de Informática Aplicada (LIA), coordinando equipos de desarrollo y automatización.</p>
+      <p>No divido el software del hardware. Diseño nodos IoT de captura eficientes, estructuro e implemento arquitecturas de sistemas asíncronos distribuidos en producción y despliego pipelines de Inteligencia Artificial (LLMs) integrados a procesos lógicos reales.</p>
+      <p>Mi enfoque es pragmático y de bajo nivel cuando se requiere: optimización de memoria en microcontroladores, persistencia de datos delgada y despliegues contenerizados highly fiables.</p>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact-wrap" id="contact">
-    <h2>¿Tienes un proyecto o desafío técnico?</h2>
-    <p style="color: var(--fg-muted); max-width: 540px; margin: 0 auto;">
-      Disponible para desarrollo de software a medida, arquitectura de sistemas distribuidos y consultoría en IoT / Inteligencia Artificial.
-    </p>
+    <!-- COL 3: CERTIFICADOS Y CURSOS -->
+    <div class="cert-list reveal d2">
+      <span class="mono" style="color:var(--fg-3);margin-bottom:8px;display:block">§ Certificaciones & Cursos</span>
 
-    <div class="contact-links">
-      <a href="mailto:edwinmvasquezf@gmail.com" class="contact-pill">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        edwinmvasquezf@gmail.com[cite: 7]
-      </a>
-      <a href="tel:+56962700372" class="contact-pill">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        +56 9 6270 0372[cite: 7]
-      </a>
-      <a href="https://github.com/edwinroket" target="_blank" rel="noopener" class="contact-pill">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        github.com/edwinroket[cite: 7]
-      </a>
+      <div class="cert-card">
+        <h4>Programación Avanzada</h4>
+        <p>IP Santo Tomás · 270 hrs pedagógicas (2026)</p>
+        <a href="docs/certificado-programacion-avanzada.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
+
+      <div class="cert-card">
+        <h4>Diseño Básico de Software</h4>
+        <p>IP Santo Tomás · 162 hrs pedagógicas (2025)</p>
+        <a href="docs/certificado-diseno-software.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
+
+      <div class="cert-card">
+        <h4>Soporte Informático</h4>
+        <p>IP Santo Tomás · 144 hrs pedagógicas (2025)</p>
+        <a href="docs/certificado-soporte-informatico.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
+
+      <div class="cert-card">
+        <h4>Internet of Things (IoT)</h4>
+        <p>MIT Professional Education / Santander (2024)</p>
+        <a href="docs/certificado-iot-mit.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
+
+      <div class="cert-card">
+        <h4>IA Generativa</h4>
+        <p>MIT Professional Education / Santander (2024)</p>
+        <a href="docs/certificado-ia-generativa-mit.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
+
+      <div class="cert-card">
+        <h4>IA y Productividad</h4>
+        <p>Google / Santander Open Academy (2024)</p>
+        <a href="docs/certificado-ia-google.pdf" target="_blank" rel="noopener" class="cert-link">Ver Certificado PDF ↗</a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section id="stack" class="stack-wrap">
+  <div class="section-head">
+    <span class="num reveal"><span class="bar"></span>§ 02 — Stack</span>
+    <h2 class="reveal d1">Herramientas<br/>de <em>oficio</em>.</h2>
+  </div>
+
+  <div class="marquee reveal">
+    <div class="marquee-track" id="mqTrack"></div>
+  </div>
+
+  <div class="stack-grid reveal d1">
+    <div class="stack-cat">
+      <h4>Lenguajes</h4>
+      <ul>
+        <li>Python</li>
+        <li>Node.js (JS)</li>
+        <li>Java / C#</li>
+        <li>C++ (Arduino / ESP)</li>
+      </ul>
+    </div>
+    <div class="stack-cat">
+      <h4>Backend & Data</h4>
+      <ul>
+        <li>Flask / FastAPI</li>
+        <li>Express</li>
+        <li>MySQL / MariaDB</li>
+        <li>Redis Vector Search</li>
+      </ul>
+    </div>
+    <div class="stack-cat">
+      <h4>DevOps & Cloud</h4>
+      <ul>
+        <li>Docker</li>
+        <li>Linux (Debian / Kali)</li>
+        <li>Git / GitHub</li>
+        <li>MQTT / HiveMQ</li>
+      </ul>
+    </div>
+    <div class="stack-cat">
+      <h4>Hardware & IA</h4>
+      <ul>
+        <li>ESP32 / ESP8266</li>
+        <li>Raspberry Pi</li>
+        <li>Integración Sensores</li>
+        <li>OpenAI / Gemini APIs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-head">
+    <span class="num reveal"><span class="bar"></span>§ 03 — Obra Selecta</span>
+    <h2 class="reveal d1">Proyectos <em>reales</em>.</h2>
+  </div>
+
+  <div class="work-intro reveal">
+    <span class="count">07 piezas arquitectónicas</span>
+    <div class="filter">
+      <button class="active" data-f="all">Todo</button>
+      <button data-f="iot">IoT / HW</button>
+      <button data-f="web">Web & Sistemas</button>
+      <button data-f="infra">IA & Infra</button>
+    </div>
+  </div>
+
+  <div class="work-grid" id="workGrid"></div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="contact-glow" aria-hidden="true"></div>
+
+  <span class="num reveal" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--fg-2);text-transform:uppercase;margin-bottom:48px;display:block">
+    <span style="display:inline-block;width:40px;height:1px;background:var(--fg-3);vertical-align:middle;margin-right:14px;margin-bottom:3px"></span>§ 04 — Contacto
+  </span>
+
+  <h2 class="reveal">¿Tienes un<br/><em>desafío técnico?</em></h2>
+
+  <a class="contact-mail reveal d1" href="mailto:edwinmvasquezf@gmail.com">
+    <span>edwinmvasquezf@gmail.com</span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <div class="contact-grid">
+    <div class="col reveal">
+      <h4>Teléfono</h4>
+      <a href="tel:+56962700372">+56 9 6270 0372</a>
+      <div class="sub">Canal directo activo</div>
+    </div>
+    <div class="col reveal d1">
+      <h4>GitHub</h4>
+      <a href="https://github.com/edwinroket" target="_blank" rel="noopener">github.com/edwinroket</a>
+      <div class="sub">Código fuente y repos públicos</div>
+    </div>
+    <div class="col reveal d2">
+      <h4>Ubicación</h4>
+      <p>Talca, Chile</p>
+      <div class="sub">Disponibilidad remota e híbrida</div>
+    </div>
+    <div class="col reveal d3">
+      <h4>Estrategia</h4>
+      <p>Boleta de Honorarios</p>
+      <div class="sub">Sustentación ágil y directa</div>
+    </div>
+  </div>
 
   <footer>
-    <p>© 2026 Edwin Vásquez Fontalvo · Talca, Chile. Alojado en GitHub Pages.</p>
+    <span>© MMXXVI · Edwin M. Vásquez Fontalvo</span>
+    <svg class="footer-mark" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="E / V">
+      <rect x="0.5" y="0.5" width="63" height="31" rx="4" stroke="#a8a092" stroke-width="0.75" stroke-opacity="0.45"/>
+      <text x="9" y="23" font-family="'Bricolage Grotesque','Georgia',serif" font-style="italic" font-weight="500" font-size="21" fill="#a8a092">E</text>
+      <line x1="33" y1="27" x2="36" y2="5" stroke="#5e584d" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="39" y="23" font-family="'Bricolage Grotesque','Georgia',serif" font-style="italic" font-weight="500" font-size="21" fill="#a8a092">V</text>
+    </svg>
+    <span>Codificado a mano · Talca, Chile</span>
   </footer>
+</section>
 
 </div>
 
+<script>
+(function(){
+"use strict";
+
+function safe(fn, name){
+  try{ fn(); }catch(e){ console.warn('['+name+']', e); }
+}
+
+function esc(ch){
+  return ch==='&'?'&amp;':ch==='<'?'&lt;':ch==='>'?'&gt;':ch==='"'?'&quot;':ch;
+}
+
+function initClock(){
+  var el=document.getElementById('clock');
+  if(!el) return;
+  function tick(){
+    var d=new Date();
+    el.textContent=new Intl.DateTimeFormat('es-CL',{
+      hour:'2-digit',minute:'2-digit',second:'2-digit',
+      hour12:false,timeZone:'America/Santiago'
+    }).format(d);
+  }
+  tick(); setInterval(tick,1000);
+}
+
+function initNavScroll(){
+  var nav=document.getElementById('nav');
+  if(!nav) return;
+  window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled', window.scrollY>24);
+  },{passive:true});
+}
+
+function initCursor(){
+  var root=document.querySelector('[data-cursor-root]');
+  if(!root) return;
+  if(!matchMedia('(pointer:fine)').matches) return;
+  var ring=root.querySelector('.cursor-ring');
+  var dot=root.querySelector('.cursor-dot');
+  var tx=0,ty=0,rx=0,ry=0,firstMove=false;
+
+  window.addEventListener('mousemove',function(e){
+    tx=e.clientX; ty=e.clientY;
+    if(dot) dot.style.transform='translate3d('+tx+'px,'+ty+'px,0)';
+    if(!firstMove){
+      firstMove=true;
+      rx=tx; ry=ty;
+      if(ring) ring.style.transform='translate3d('+rx+'px,'+ry+'px,0)';
+      root.classList.add('is-ready');
+      document.documentElement.classList.add('cursor-active');
+    }
+  },{passive:true});
+
+  function tick(){
+    rx+=(tx-rx)*0.15; ry+=(ty-ry)*0.15;
+    if(ring) ring.style.transform='translate3d('+rx.toFixed(2)+'px,'+ry.toFixed(2)+'px,0)';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  var HOVER='a[href],button,.work-card,.contact-mail';
+  document.addEventListener('mouseover',function(e){
+    if(e.target.closest(HOVER)) root.classList.add('is-interactive');
+  });
+  document.addEventListener('mouseout',function(e){
+    if(e.target.closest(HOVER)&&(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest(HOVER)))
+      root.classList.remove('is-interactive');
+  });
+}
+
+function initScrollProgress(){
+  var bar=document.querySelector('[data-scroll-progress]');
+  if(!bar) return;
+  var raf=null;
+  function update(){
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=max>0?window.scrollY/max:0;
+    bar.style.transform='scaleX('+pct+')';
+    raf=null;
+  }
+  window.addEventListener('scroll',function(){
+    if(!raf) raf=requestAnimationFrame(update);
+  },{passive:true});
+  update();
+}
+
+function initHeroMesh(){
+  var hero=document.querySelector('header.hero');
+  if(!hero) return;
+  var mx=28,my=45,vtx=28,vty=45;
+  var raf=null;
+
+  window.addEventListener('mousemove',function(e){
+    vtx=(e.clientX/window.innerWidth)*100;
+    vty=(e.clientY/window.innerHeight)*100;
+    if(!raf) raf=requestAnimationFrame(frame);
+  },{passive:true});
+
+  function frame(){
+    mx+=(vtx-mx)*0.055; my+=(vty-my)*0.055;
+    hero.style.setProperty('--mx',mx.toFixed(2)+'%');
+    hero.style.setProperty('--my',my.toFixed(2)+'%');
+    raf=requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+function initHeroTitle(){
+  var title=document.getElementById('heroTitle');
+  if(!title) return;
+
+  var charIdx=0;
+  var lines=title.querySelectorAll('.line');
+
+  lines.forEach(function(line){
+    var childNodes=Array.from(line.childNodes);
+    var newHtml='';
+
+    childNodes.forEach(function(node){
+      if(node.nodeType===3){
+        Array.from(node.textContent).forEach(function(ch){
+          if(ch===' '){
+            newHtml+='<span class="word-gap"> </span>';
+          } else {
+            var delay=300+(charIdx*42);
+            newHtml+='<span class="char" style="transition-delay:'+delay+'ms">'+esc(ch)+'</span>';
+            charIdx++;
+          }
+        });
+      } else if(node.nodeType===1){
+        var tag=node.tagName.toLowerCase();
+        var inner='';
+        Array.from(node.textContent).forEach(function(ch){
+          if(ch===' '){
+            inner+='<span class="word-gap"> </span>';
+          } else {
+            var delay=300+(charIdx*42);
+            inner+='<span class="char" style="transition-delay:'+delay+'ms">'+esc(ch)+'</span>';
+            charIdx++;
+          }
+        });
+        newHtml+='<'+tag+'>'+inner+'</'+tag+'>';
+      }
+    });
+
+    line.innerHTML=newHtml;
+  });
+
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      title.querySelectorAll('.char').forEach(function(ch){
+        ch.classList.add('in');
+      });
+    });
+  });
+}
+
+function initMarquee(){
+  var stackList=['Python','Node.js','Docker','MQTT','MariaDB','Flask','FastAPI','ESP32','Raspberry Pi','Linux','Git','C#','Java','Redis'];
+  var mq=document.getElementById('mqTrack');
+  if(!mq||mq.children.length>0) return;
+  var html=stackList.map(function(s){
+    return '<span class="mq-item"><em>'+s+'</em></span>';
+  }).join('');
+  mq.innerHTML=html+html;
+}
+
+function initWorkGrid(){
+  var works=[
+    {cls:'c1 feat-a',tag:'IoT · Seguridad Crítica',yr:'2026',title:'gasLeak',em:'',desc:'Monitoreo residencial de GLP/Natural. Firmware asíncrono no bloqueante, portal cautivo y canal de confirmación humana.',stack:['ESP8266','Python','MariaDB','MQTT','Flutter'],cat:'iot',ph:'CÓDIGO Y ARQUITECTURA PRIVADA', url:'https://github.com/edwinroket'},
+    {cls:'c2 feat-b',tag:'Web · Corporativo',yr:'2025',title:'MCI Talca',em:'Sitio Oficial',desc:'¿Tienes un negocio? Diseñamos plataformas web institucionales a medida. Código minimalista y captura local de formularios.',stack:['Node.js','Express','HTML5','CSS3','Vanilla JS'],cat:'web',ph:'SITIO EN PRODUCCIÓN', url:'https://mcitalca.cl/'},
+    {cls:'c3 feat-c',tag:'IA · Automatización',yr:'2026',title:'Tomasín AI',em:'RAG Agent',desc:'Agente conversacional universitario. Pipeline RAG con búsqueda por similitud vectorial KNN en Redis y síntesis de voz.',stack:['Python','Flask','Redis Vector','OpenAI API','gTTS'],cat:'infra',ph:'ARQUITECTURA IA PRIVADA', url:'https://github.com/edwinroket'},
+    {cls:'c4 feat-a',tag:'Software · 100% Propio',yr:'2026',title:'POSFarmacia',em:'',desc:'Sistema transaccional de punto de venta farmacéutico. Arquitectura de base de datos relacional strictly normalizada.',stack:['Node.js','C#','MySQL','MariaDB'],cat:'web',ph:'CÓDIGO PRIVADO', url:'https://github.com/edwinroket'},
+    {cls:'c5 feat-b',tag:'IoT · Arquitectura',yr:'2024',title:'AireTalca',em:'Estaciones',desc:'Ingeniería y arquitectura para red urbana de monitoreo ambiental. Configuración de estaciones base y transmisión cloud.',stack:['Raspberry Pi','Python','MQTT','MariaDB'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://airetalca.cl/'},
+    {cls:'c6 feat-c',tag:'Software · 100% Propio',yr:'2025',title:'Cargapp',em:'Mobile',desc:'Aplicación móvil orientada a la auditoría y monitoreo geolocalizado de tarifas de combustibles en tiempo real.',stack:['Flutter','Python','REST APIs'],cat:'web',ph:'VER DEMO VIDEO (SHORTS)', url:'https://www.youtube.com/shorts/evBx-pI05yE'},
+    {cls:'c7 feat-a',tag:'IoT · Agrotech',yr:'2025',title:'SmartBee',em:'Telemetría',desc:'Ejecución técnica de hardware embebido para monitoreo biomecánico de colmenas y transmisión a dashboards analíticos.',stack:['ESP32','Sensores IoT','MQTT','Cloud Infra'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://smartbee.cl/'}
+  ];
+  var wg=document.getElementById('workGrid');
+  if(!wg||wg.children.length>0) return;
+
+  works.forEach(function(w,i){
+    var card=document.createElement('a');
+    card.className='work-card '+w.cls+' reveal d'+((i%5)+1);
+    card.href=w.url;
+    card.target="_blank";
+    card.rel="noopener";
+    card.dataset.cat=w.cat;
+    card.innerHTML=
+      '<div class="card-halo" aria-hidden="true"></div>'+
+      '<div class="thumb"><span class="ph">'+w.ph+'</span></div>'+
+      '<span class="arrow-cta" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg></span>'+
+      '<div class="overlay">'+
+        '<div class="tag"><span>'+w.tag+'</span><span class="yr">'+w.yr+'</span></div>'+
+        '<div class="meta">'+
+          '<h3>'+w.title+(w.em?' <em>'+w.em+'</em>':'')+'</h3>'+
+          '<p class="desc">'+w.desc+'</p>'+
+          '<div class="stack-tags">'+w.stack.map(function(s){return '<span>'+s+'</span>';}).join('')+'</div>'+
+        '</div>'+
+      '</div>';
+    wg.appendChild(card);
+  });
+}
+
+function initTilt(){
+  if(matchMedia('(hover:none)').matches) return;
+  document.querySelectorAll('.work-card').forEach(function(card){
+    var MAX=6;
+    var tx=0,ty=0,cx=0,cy=0,raf=null;
+
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width-0.5;
+      var py=(e.clientY-r.top)/r.height-0.5;
+      tx=-py*MAX; ty=px*MAX;
+      card.style.setProperty('--hx',((e.clientX-r.left)/r.width*100)+'%');
+      card.style.setProperty('--hy',((e.clientY-r.top)/r.height*100)+'%');
+      if(!raf) raf=requestAnimationFrame(loop);
+    });
+    card.addEventListener('mouseleave',function(){
+      tx=0; ty=0;
+      if(!raf) raf=requestAnimationFrame(loop);
+    });
+
+    function loop(){
+      cx+=(tx-cx)*0.12; cy+=(ty-cy)*0.12;
+      card.style.setProperty('--rx',cx.toFixed(2)+'deg');
+      card.style.setProperty('--ry',cy.toFixed(2)+'deg');
+      raf=(Math.abs(tx-cx)>0.04||Math.abs(ty-cy)>0.04)?requestAnimationFrame(loop):null;
+    }
+  });
+}
+
+function initScramble(){
+  var GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  document.querySelectorAll('.navlinks a').forEach(function(el){
+    var original=el.textContent.trim();
+    var animating=false;
+    el.addEventListener('mouseenter',function(){
+      if(animating) return;
+      animating=true;
+      var chars=Array.from(original);
+      var delays=chars.map(function(_,i){ return 40+i*48+Math.random()*55; });
+      var start=performance.now();
+      function tick(now){
+        var elapsed=now-start;
+        el.textContent=chars.map(function(c,i){
+          if(c===' ') return ' ';
+          if(elapsed<delays[i]) return GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+          return c;
+        }).join('');
+        if(chars.some(function(c,i){ return c!==' '&&elapsed<delays[i]; })){
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent=original;
+          animating=false;
+        }
+      }
+      requestAnimationFrame(tick);
+    });
+  });
+}
+
+function initFilter(){
+  var wg=document.getElementById('workGrid');
+  document.querySelectorAll('.filter button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.filter button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f=btn.dataset.f;
+      document.querySelectorAll('.work-card').forEach(function(c){
+        c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
+      });
+      if(wg) wg.classList.toggle('filtered',f!=='all');
+    });
+  });
+}
+
+function initHamburger(){
+  var btn=document.getElementById('menuBtn');
+  var links=document.querySelector('.navlinks');
+  if(!btn||!links) return;
+  btn.addEventListener('click',function(){
+    var open=btn.classList.toggle('open');
+    links.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      btn.classList.remove('open');
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+}
+
+function initReveals(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.03,rootMargin:'0px 0px -30px 0px'});
+
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){
+      if(el.getBoundingClientRect().top<window.innerHeight) el.classList.add('in');
+    });
+  },6000);
+}
+
+function initSmoothAnchors(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id=a.getAttribute('href');
+    if(!id||id==='#') return;
+    var target=document.querySelector(id);
+    if(!target) return;
+    e.preventDefault();
+    window.scrollTo({
+      top:target.getBoundingClientRect().top+window.scrollY-80,
+      behavior:'smooth'
+    });
+  });
+}
+
+function boot(){
+  safe(initClock,         'clock');
+  safe(initNavScroll,     'nav');
+  safe(initCursor,        'cursor');
+  safe(initScrollProgress,'progress');
+  safe(initHeroMesh,      'mesh');
+  safe(initHeroTitle,     'hero');
+  safe(initMarquee,       'marquee');
+  safe(initWorkGrid,      'grid');
+  safe(initTilt,          'tilt');
+  safe(initScramble,      'scramble');
+  safe(initFilter,        'filter');
+  safe(initHamburger,     'hamburger');
+  safe(initReveals,       'reveals');
+  safe(initSmoothAnchors, 'anchors');
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',boot);
+} else {
+  boot();
+}
+
+})();
+</script>
 </body>
 </html>
