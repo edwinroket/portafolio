@@ -194,8 +194,9 @@ section{padding:140px 0;position:relative}
 .work-intro .filter button:hover:not(.active){border-color:var(--fg-2);color:var(--fg)}
 
 .work-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:140px;gap:16px}
-.work-card{position:relative;background:var(--bg-2);border:1px solid var(--line);overflow:hidden;cursor:pointer;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1),border-color .35s;will-change:transform}
+.work-card{position:relative;width:100%;padding:0;text-align:left;appearance:none;font:inherit;color:inherit;background:var(--bg-2);border:1px solid var(--line);overflow:hidden;cursor:pointer;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1),border-color .35s;will-change:transform}
 .work-card:hover {border-color:var(--fg-3)}
+.work-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 
 .card-halo{position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(200px circle at var(--hx,50%) var(--hy,50%),oklch(0.86 0.17 105 / .18),transparent 65%);opacity:0;transition:opacity .4s}
 .work-card:hover .card-halo{opacity:1}
@@ -214,6 +215,7 @@ section{padding:140px 0;position:relative}
 .work-card .desc{font-size:12px;color:var(--fg-2);line-height:1.4;max-width:420px}
 .work-card .stack-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
 .work-card .stack-tags span{font-family:var(--mono);font-size:9px;color:var(--fg-3);letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--line);border-radius:99px}
+.work-card .case-cta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:6px}
 
 .work-card.c1{grid-column:1/8;grid-row:span 3}
 .work-card.c2{grid-column:8/13;grid-row:span 3}
@@ -229,6 +231,25 @@ section{padding:140px 0;position:relative}
 .work-card:hover .arrow-cta svg{stroke:#0a0a09}
 
 .work-grid.filtered .work-card{grid-column:span 4!important;grid-row:span 3!important}
+
+.case-dialog{width:min(780px,calc(100% - 32px));max-height:min(760px,calc(100% - 32px));margin:auto;padding:0;border:1px solid var(--fg-3);background:var(--bg-2);color:var(--fg);box-shadow:0 24px 100px rgba(0,0,0,.65)}
+.case-dialog::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(8px)}
+.case-dialog-inner{padding:clamp(28px,5vw,56px);position:relative}
+.case-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--fg);font-size:24px;line-height:1;cursor:pointer}
+.case-close:hover,.case-close:focus-visible{border-color:var(--accent);color:var(--accent)}
+.case-dialog .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px}
+.case-dialog h3{font-family:var(--serif);font-size:clamp(40px,7vw,72px);font-weight:500;line-height:.92;letter-spacing:-.04em;margin-bottom:28px}
+.case-dialog .summary{font-family:var(--serif);font-size:clamp(20px,3vw,28px);line-height:1.3;max-width:650px;color:var(--fg)}
+.case-points{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:36px 0}
+.case-points div{background:var(--bg);padding:20px}
+.case-points h4{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin-bottom:8px}
+.case-points p{font-size:14px;color:var(--fg-2);line-height:1.5}
+.case-link{display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid var(--accent);padding-bottom:7px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+  .cursor,.scroll-progress,.hero-mesh{display:none!important}
+}
 
 .contact{padding:72px 0 80px;border-top:1px solid var(--line);position:relative;overflow:hidden}
 .contact-glow{position:absolute;top:-80px;left:-5%;right:-5%;height:360px;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 25% 50%,oklch(0.86 0.17 105 / .07),transparent 55%),radial-gradient(ellipse at 75% 50%,oklch(0.72 0.07 250 / .04),transparent 55%);filter:blur(70px)}
@@ -273,6 +294,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
   .work-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:120px}
   .work-card.c1,.work-card.c2,.work-card.c3,.work-card.c4,.work-card.c5,.work-card.c6,.work-card.c7{grid-column:1/-1;grid-row:span 3}
   .contact-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  .case-points{grid-template-columns:1fr}
   .ascii-deco{display:none}
   section{padding:80px 0}
   header.hero{padding:120px 0 60px}
@@ -305,7 +327,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
     <div class="navlinks">
       <a href="#about" data-num="01">Sobre</a>
       <a href="#stack" data-num="02">Stack</a>
-      <a href="#work" data-num="03">Obra</a>
+      <a href="#work" data-num="03">Proyectos</a>
       <a href="#contact" data-num="04">Contacto</a>
     </div>
     <div class="nav-right">
@@ -375,7 +397,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
     <div class="about-prose reveal d1">
       <p>Estudio Ingeniería en Informática en Santo Tomás Talca y me desempeño como Líder de Proyectos Tecnológicos en el Laboratorio de Informática Aplicada (LIA), coordinando equipos de desarrollo y automatización.</p>
       <p>No divido el software del hardware. Diseño nodos IoT de captura eficientes, estructuro e implemento arquitecturas de sistemas asíncronos distribuidos en producción y despliego pipelines de Inteligencia Artificial (LLMs) integrados a procesos lógicos reales.</p>
-      <p>Mi enfoque es pragmático y de bajo nivel cuando se requiere: optimización de memoria en microcontroladores, persistencia de datos delgada y despliegues contenerizados highly fiables.</p>
+      <p>Mi enfoque es pragmático y de bajo nivel cuando se requiere: optimización de memoria en microcontroladores, persistencia de datos delgada y despliegues contenerizados altamente fiables.</p>
     </div>
 
     <!-- COL 3: CERTIFICADOS Y CURSOS -->
@@ -473,12 +495,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
 
 <section id="work">
   <div class="section-head">
-    <span class="num reveal"><span class="bar"></span>§ 03 — Obra Selecta</span>
+    <span class="num reveal"><span class="bar"></span>§ 03 — Proyectos</span>
     <h2 class="reveal d1">Proyectos <em>reales</em>.</h2>
   </div>
 
   <div class="work-intro reveal">
-    <span class="count">07 piezas arquitectónicas</span>
+    <span class="count">07 casos de estudio · selecciona uno para conocer el enfoque</span>
     <div class="filter">
       <button class="active" data-f="all">Todo</button>
       <button data-f="iot">IoT / HW</button>
@@ -489,6 +511,22 @@ footer{border-top:1px solid var(--line);padding:36px 0;margin-top:120px;display:
 
   <div class="work-grid" id="workGrid"></div>
 </section>
+
+<dialog class="case-dialog" id="caseDialog" aria-labelledby="caseTitle">
+  <div class="case-dialog-inner">
+    <button class="case-close" type="button" aria-label="Cerrar caso de estudio" data-case-close>×</button>
+    <p class="eyebrow" id="caseTag"></p>
+    <h3 id="caseTitle"></h3>
+    <p class="summary" id="caseSummary"></p>
+    <div class="case-points">
+      <div><h4>Problema</h4><p id="caseProblem"></p></div>
+      <div><h4>Mi aporte</h4><p id="caseRole"></p></div>
+      <div><h4>Arquitectura</h4><p id="caseArchitecture"></p></div>
+      <div><h4>Resultado</h4><p id="caseResult"></p></div>
+    </div>
+    <a class="case-link" id="caseLink" target="_blank" rel="noopener">Abrir referencia ↗</a>
+  </div>
+</dialog>
 
 <section id="contact" class="contact">
   <div class="contact-glow" aria-hidden="true"></div>
@@ -712,24 +750,25 @@ function initMarquee(){
 
 function initWorkGrid(){
   var works=[
-    {cls:'c1 feat-a',tag:'IoT · Seguridad Crítica',yr:'2026',title:'gasLeak',em:'',desc:'Monitoreo residencial de GLP/Natural. Firmware asíncrono no bloqueante, portal cautivo y canal de confirmación humana.',stack:['ESP8266','Python','MariaDB','MQTT','Flutter'],cat:'iot',ph:'CÓDIGO Y ARQUITECTURA PRIVADA', url:'https://github.com/edwinroket'},
-    {cls:'c2 feat-b',tag:'Web · Corporativo',yr:'2025',title:'MCI Talca',em:'Sitio Oficial',desc:'¿Tienes un negocio? Diseñamos plataformas web institucionales a medida. Código minimalista y captura local de formularios.',stack:['Node.js','Express','HTML5','CSS3','Vanilla JS'],cat:'web',ph:'SITIO EN PRODUCCIÓN', url:'https://mcitalca.cl/'},
-    {cls:'c3 feat-c',tag:'IA · Automatización',yr:'2026',title:'Tomasín AI',em:'RAG Agent',desc:'Agente conversacional universitario. Pipeline RAG con búsqueda por similitud vectorial KNN en Redis y síntesis de voz.',stack:['Python','Flask','Redis Vector','OpenAI API','gTTS'],cat:'infra',ph:'ARQUITECTURA IA PRIVADA', url:'https://github.com/edwinroket'},
-    {cls:'c4 feat-a',tag:'Software · 100% Propio',yr:'2026',title:'POSFarmacia',em:'',desc:'Sistema transaccional de punto de venta farmacéutico. Arquitectura de base de datos relacional strictly normalizada.',stack:['Node.js','C#','MySQL','MariaDB'],cat:'web',ph:'CÓDIGO PRIVADO', url:'https://github.com/edwinroket'},
-    {cls:'c5 feat-b',tag:'IoT · Arquitectura',yr:'2024',title:'AireTalca',em:'Estaciones',desc:'Ingeniería y arquitectura para red urbana de monitoreo ambiental. Configuración de estaciones base y transmisión cloud.',stack:['Raspberry Pi','Python','MQTT','MariaDB'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://airetalca.cl/'},
-    {cls:'c6 feat-c',tag:'Software · 100% Propio',yr:'2025',title:'Cargapp',em:'Mobile',desc:'Aplicación móvil orientada a la auditoría y monitoreo geolocalizado de tarifas de combustibles en tiempo real.',stack:['Flutter','Python','REST APIs'],cat:'web',ph:'VER DEMO VIDEO (SHORTS)', url:'https://www.youtube.com/shorts/evBx-pI05yE'},
-    {cls:'c7 feat-a',tag:'IoT · Agrotech',yr:'2025',title:'SmartBee',em:'Telemetría',desc:'Ejecución técnica de hardware embebido para monitoreo biomecánico de colmenas y transmisión a dashboards analíticos.',stack:['ESP32','Sensores IoT','MQTT','Cloud Infra'],cat:'iot',ph:'SITIO EN PRODUCCIÓN', url:'https://smartbee.cl/'}
+    {cls:'c1 feat-a',tag:'IoT · Seguridad Crítica',yr:'2026',title:'gasLeak',em:'',desc:'Monitoreo residencial de GLP/Natural con firmware no bloqueante y confirmación humana.',stack:['ESP8266','Python','MariaDB','MQTT','Flutter'],cat:'iot',ph:'CASO DE ESTUDIO',url:'mailto:edwinmvasquezf@gmail.com?subject=Consulta%20sobre%20gasLeak',linkLabel:'Solicitar información',problem:'Detectar fugas de gas de forma oportuna sin depender de una interfaz local.',role:'Diseño de firmware, flujo de alertas y persistencia del sistema.',architecture:'ESP8266 · MQTT · API Python · MariaDB · cliente Flutter.',result:'Prototipo orientado a monitoreo residencial y respuesta humana ante alertas.'},
+    {cls:'c2 feat-b',tag:'Web · Corporativo',yr:'2025',title:'MCI Talca',em:'Sitio Oficial',desc:'Plataforma institucional a medida con comunicación directa y captura local de contactos.',stack:['Node.js','Express','HTML5','CSS3','Vanilla JS'],cat:'web',ph:'SITIO EN PRODUCCIÓN',url:'https://mcitalca.cl/',linkLabel:'Visitar sitio',problem:'Dar una presencia digital clara a una organización local.',role:'Desarrollo de la plataforma web y definición de una interfaz ligera.',architecture:'Node.js · Express · HTML · CSS · JavaScript.',result:'Sitio institucional público, preparado para canalizar consultas comerciales.'},
+    {cls:'c3 feat-c',tag:'IA · Automatización',yr:'2026',title:'Tomasín AI',em:'RAG Agent',desc:'Agente universitario con recuperación vectorial, respuestas contextualizadas y síntesis de voz.',stack:['Python','Flask','Redis Vector','OpenAI API','gTTS'],cat:'infra',ph:'CASO DE ESTUDIO',url:'mailto:edwinmvasquezf@gmail.com?subject=Consulta%20sobre%20Tomas%C3%ADn%20AI',linkLabel:'Solicitar información',problem:'Centralizar información institucional para responder consultas repetitivas con contexto.',role:'Diseño del pipeline RAG y la integración conversacional.',architecture:'Flask · Redis Vector Search · OpenAI API · gTTS.',result:'Agente capaz de recuperar contexto antes de generar una respuesta.'},
+    {cls:'c4 feat-a',tag:'Software · 100% Propio',yr:'2026',title:'POSFarmacia',em:'',desc:'Sistema de punto de venta farmacéutico con modelo relacional y operaciones transaccionales.',stack:['Node.js','C#','MySQL','MariaDB'],cat:'web',ph:'CASO DE ESTUDIO',url:'mailto:edwinmvasquezf@gmail.com?subject=Consulta%20sobre%20POSFarmacia',linkLabel:'Solicitar información',problem:'Modelar ventas, inventario y operaciones de farmacia de manera consistente.',role:'Diseño del modelo de datos y desarrollo de la solución transaccional.',architecture:'Node.js · C# · MySQL · MariaDB.',result:'Base funcional con una arquitectura de datos estrictamente normalizada.'},
+    {cls:'c5 feat-b',tag:'IoT · Arquitectura',yr:'2024',title:'AireTalca',em:'Estaciones',desc:'Arquitectura para monitoreo ambiental urbano mediante estaciones conectadas a la nube.',stack:['Raspberry Pi','Python','MQTT','MariaDB'],cat:'iot',ph:'SITIO EN PRODUCCIÓN',url:'https://airetalca.cl/',linkLabel:'Visitar sitio',problem:'Recopilar y transportar datos ambientales desde estaciones distribuidas.',role:'Ejecución técnica de estaciones base y transmisión de datos.',architecture:'Raspberry Pi · Python · MQTT · MariaDB.',result:'Infraestructura orientada a visualizar datos ambientales urbanos.'},
+    {cls:'c6 feat-c',tag:'Software · 100% Propio',yr:'2025',title:'Cargapp',em:'Mobile',desc:'Aplicación móvil para auditoría y monitoreo geolocalizado de tarifas de combustibles.',stack:['Flutter','Python','REST APIs'],cat:'web',ph:'VER DEMO',url:'https://www.youtube.com/shorts/evBx-pI05yE',linkLabel:'Ver demo en video',problem:'Consultar y auditar tarifas de combustible considerando ubicación.',role:'Desarrollo de la aplicación móvil y la integración con servicios de datos.',architecture:'Flutter · Python · APIs REST.',result:'Demo funcional que comunica el flujo de monitoreo geolocalizado.'},
+    {cls:'c7 feat-a',tag:'IoT · Agrotech',yr:'2025',title:'SmartBee',em:'Telemetría',desc:'Hardware embebido y telemetría para el monitoreo de colmenas con dashboards analíticos.',stack:['ESP32','Sensores IoT','MQTT','Cloud Infra'],cat:'iot',ph:'SITIO EN PRODUCCIÓN',url:'https://smartbee.cl/',linkLabel:'Visitar sitio',problem:'Capturar variables relevantes de colmenas y transmitirlas para su análisis.',role:'Implementación de hardware embebido y canal de telemetría.',architecture:'ESP32 · sensores IoT · MQTT · infraestructura cloud.',result:'Sistema técnico orientado al monitoreo analítico de colmenas.'}
   ];
   var wg=document.getElementById('workGrid');
   if(!wg||wg.children.length>0) return;
 
   works.forEach(function(w,i){
-    var card=document.createElement('a');
+    var card=document.createElement('button');
+    card.type='button';
     card.className='work-card '+w.cls+' reveal d'+((i%5)+1);
-    card.href=w.url;
-    card.target="_blank";
-    card.rel="noopener";
+    card.setAttribute('aria-haspopup','dialog');
+    card.setAttribute('aria-label','Ver caso de estudio: '+w.title);
     card.dataset.cat=w.cat;
+    card.dataset.case=JSON.stringify(w);
     card.innerHTML=
       '<div class="card-halo" aria-hidden="true"></div>'+
       '<div class="thumb"><span class="ph">'+w.ph+'</span></div>'+
@@ -740,9 +779,45 @@ function initWorkGrid(){
           '<h3>'+w.title+(w.em?' <em>'+w.em+'</em>':'')+'</h3>'+
           '<p class="desc">'+w.desc+'</p>'+
           '<div class="stack-tags">'+w.stack.map(function(s){return '<span>'+s+'</span>';}).join('')+'</div>'+
+          '<span class="case-cta">Ver caso de estudio ↗</span>'+
         '</div>'+
       '</div>';
     wg.appendChild(card);
+  });
+}
+
+function initCaseDialog(){
+  var dialog=document.getElementById('caseDialog');
+  if(!dialog||!dialog.showModal) return;
+  var fields={
+    tag:document.getElementById('caseTag'),
+    title:document.getElementById('caseTitle'),
+    summary:document.getElementById('caseSummary'),
+    problem:document.getElementById('caseProblem'),
+    role:document.getElementById('caseRole'),
+    architecture:document.getElementById('caseArchitecture'),
+    result:document.getElementById('caseResult'),
+    link:document.getElementById('caseLink')
+  };
+  document.querySelectorAll('.work-card').forEach(function(card){
+    card.addEventListener('click',function(){
+      var item;
+      try{ item=JSON.parse(card.dataset.case||'{}'); }catch(e){ return; }
+      fields.tag.textContent=item.tag+' · '+item.yr;
+      fields.title.textContent=item.title+(item.em?' — '+item.em:'');
+      fields.summary.textContent=item.desc;
+      fields.problem.textContent=item.problem;
+      fields.role.textContent=item.role;
+      fields.architecture.textContent=item.architecture;
+      fields.result.textContent=item.result;
+      fields.link.href=item.url;
+      fields.link.textContent=(item.linkLabel||'Abrir referencia')+' ↗';
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('[data-case-close]').addEventListener('click',function(){ dialog.close(); });
+  dialog.addEventListener('click',function(e){
+    if(e.target===dialog) dialog.close();
   });
 }
 
@@ -882,6 +957,7 @@ function boot(){
   safe(initHeroTitle,     'hero');
   safe(initMarquee,       'marquee');
   safe(initWorkGrid,      'grid');
+  safe(initCaseDialog,    'case-dialog');
   safe(initTilt,          'tilt');
   safe(initScramble,      'scramble');
   safe(initFilter,        'filter');
